@@ -1,7 +1,6 @@
-import sys
-sys.path.append("ijson")
 import ijson
 import json
+from mpi4py import MPI
 
 # check if the coords in in the grid
 def coordsInGrid(point, grid):
@@ -15,7 +14,7 @@ def coordsInGrid(point, grid):
     return False
 
 # read Sydney grid
-f = open("data/sydGrid.json","r")
+f = open("sydGrid-2.json","r")
 grid  = json.load(f)
 gridDict = {}
 for feature in grid["features"]:
@@ -23,7 +22,7 @@ for feature in grid["features"]:
 gridDict = dict(sorted(gridDict.items()))
 
 # read twitter json
-f = open("data/smallTwitter.json","r")
+f = open("smallTwitter.json","r")
 datas = ijson.items(f,'rows.item')
 datas = list(datas)
 filterd_data = [data for data in datas if data["doc"]["coordinates"]!=None]
@@ -37,7 +36,6 @@ for data in filterd_data:
         if coordsInGrid(data["doc"]["coordinates"]["coordinates"],value):
             inRange_data.append(data)
             break
-
 
 #TODO: 1. make the inRange_data to dict, and count by the grid id
 #      2. count language in the each region
