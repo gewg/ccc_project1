@@ -2,7 +2,7 @@ import ijson
 import json
 from mpi4py import MPI
 
-# check if the coords in in the grid
+# check if the coords in in the grid1
 def coordsInGrid(point, grid):
     lat1 = grid[0][0]
     lat2 = grid[2][0]
