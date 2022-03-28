@@ -1,42 +1,47 @@
-from mpi4py import MPI
 import mmap
+import json
 
 
 class Slave:
 
     def __init__(self, grid_map):
         self.grid_map = grid_map
-    
 
-    def filter_twitter_data():
+
+    def get_grid_info(self, coordinate):
         '''
-        Remove the data which is not in the grid
+        Get the useful data from twitter file's each line
+
+        :param coordinate: a tuple with coordinate
+        :return boolean or int: 'false if coordinate does not match the city grid' or 'grid id if matches'
         '''
-        inRange_data = []
-        for data in filterd_data:
-            for key,value in gridDict.items():
-                if coordsInGrid(data["doc"]["coordinates"]["coordinates"],value):
-                    inRange_data.append(data)
-                    break
-    
+        # check whether current line's coordinate exists
 
-    def read_twitter_json_file(json_file, start, end):
+
+
+        return 1
+
+
+    def convert_byte_to_json(self, byte_line):
         '''
-        Read the large twitter json file 
-        
-        :param json_file: the file be read
-        :start: the first line to read
-        :end: the lastest line to read
+        Accept byte string from twitter file, transfer it to json format
 
-        :no return
-        
+        :param byte_line: the byte string
+        :return: json string
         '''
+        # convert current line from byte to string format
+        byte_line = byte_line.decode('utf8')
+        # remove useless element and convert current line to json format
+        byte_line = byte_line.replace('"location":"sydney"}},', '"location":"sydney"}}')
+        byte_line = byte_line.replace('"location":"sydney"}}]}', '"location":"sydney"}}')
+        # convert current line from string to json format
+        byte_line = json.loads(byte_line) 
+ 
+        return byte_line
 
-        # read the file
-        with open(json_file, "r") as f:
-            mm = mmap.mmap(f.fileno(), 0, access=mmap.ACCESS_READ)
 
-            # filter the twitter data to match grid
-            for line in iter(mm.readline, b""):
+
+
+                
 
                 
