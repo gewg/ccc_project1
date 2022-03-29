@@ -92,4 +92,53 @@ class Master:
         return language_map
 
 
+    def show_result(self, dict_result, language_map):
+        '''
+        Print the result in terminal
+
+        :param dict_result: the dictionary with 'key as gird id' and 'value as another dictionary'
+        :param dict_result: the another dictionary with 'key as language code' and 'value corresponding user's amount of key'
+        '''
+
+        # show the title
+        print(f"Cell   #Total Tweets   #Number of Languages Used         #Top 10 Languages & #Tweets")
+
+        # show the grid's one by one
+        for curr_grid_id in dict_result.keys():
+            
+            # get the current grid's dictionary
+            curr_grid_dict = dict_result[curr_grid_id]
+
+            # get info
+            total_tweets = curr_grid_dict['total_tweets']
+            total_language_be_used = len(curr_grid_dict.keys()) - 1 # minus 1 means minus the 'total_tweets' attribute
+
+            # sort dictionary to get the top 10 language
+            curr_grid_dict = {k: v for k, v in sorted(curr_grid_dict.items(), key=lambda item: item[1])}
+            
+            # search the top 10 language
+            top_10_string = ""
+            top_10_count = 0
+            for curr_language_code in curr_grid_dict.keys():
+                
+                # skip the largest element which is the total tweets
+                if (curr_language_code == 'total_tweets'):
+                    continue
+                
+                # combine the string
+                top_10_string += f"{language_map[curr_language_code]}-{curr_grid_dict[curr_language_code]}, "
+                top_10_count +=1
+
+                # stop searching when loop reaches 10 language
+                if (top_10_count == 11):
+                    break
+            
+            # delete the lastest comma and blank
+            top_10_string = top_10_string[:-2]
+            # show the current cell's info
+            print(f"{curr_grid_id}      {total_tweets}              {total_language_be_used}                                  ({top_10_string})")
+
+
+
+
 

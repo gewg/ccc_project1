@@ -1,5 +1,5 @@
+from collections import defaultdict
 import mmap
-from ast import literal_eval
 from mpi4py import MPI
 from master import Master
 from slave import Slave
@@ -8,20 +8,27 @@ comm = MPI.COMM_WORLD
 size = comm.Get_size()
 rank = comm.Get_rank()
 
+# the twitter data
+TWITTER_DATA = "data/bigTwitter.json"
+# the city grid data
+CITY_GRID_DATA = "data/sydGrid.json"
+# the language code data
+LANGUAGE_CODE_DATA = "data/language_code.json"
+
 # the master node
 if rank == 0:
 
     master = Master()
 
     '''Get the city grid map'''
-    grid_map = master.get_grid_file("data/sydGrid.json")
+    grid_map = master.get_grid_file(CITY_GRID_DATA)
 
     '''Get the language map'''
-    language_map = master.get_language_code_map("data/language_code.json")
+    language_map = master.get_language_code_map(LANGUAGE_CODE_DATA)
 
     '''Assign reading's task to slaves'''
     # get the number of twitter data's rows and offset for each line in twitter data
-    twitter_info = master.get_twitter_file_info("data/tinyTwitter.json")
+    twitter_info = master.get_twitter_file_info(TWITTER_DATA)
     num_twitter_row = twitter_info[0]
     twitter_file_offset = twitter_info[1]
 
@@ -55,22 +62,30 @@ if rank == 0:
     # count the number of slaves which complete the task
     num_finish_slave = 0
 
-    # the stack to receive row's information from slave
+    # the dictinay to store the result
+    dict_result = defaultdict(lambda: defaultdict(int))
 
-    # continue loop before 
+    # continue receiving until all slaves finish their jobs
     while (num_finish_slave < num_slaves):
+        
+        # receive the message from slaves
+        recv_message = comm.recv(tag=2)
 
-        # get the finish mark from slave which completes its task
-        if (comm.recv(tag = 3)):
+        if (recv_message == 'Finish'):
+            # get the 'finish job' signal from slave
             num_finish_slave += 1
+        else:
+            # otherwise, get the grid id and language code from slave
+            grid_id = recv_message[0]
+            language_code = recv_message[1]
+            dict_result[grid_id][language_code] += 1
 
-        curr_row = comm.recv(tag = 2)
-
-        print(num_finish_slave)
+            # count the total tweets
+            dict_result[grid_id]['total_tweets'] += 1
     
-    # stop the slaves
-
-
+    # print the result in terminal
+    master.show_result(dict_result, language_map)
+    
 
 
 # the slave node
@@ -92,7 +107,7 @@ else:
 
     '''Get the required information and send to master one by one'''
     # read the file
-    json_file = "data/smallTwitter.json"
+    json_file = TWITTER_DATA
     with open(json_file, "r") as f:
         mm = mmap.mmap(f.fileno(), 0, access=mmap.ACCESS_READ)
         
@@ -118,12 +133,13 @@ else:
                 # get the corresponding grid information of the coordinate
                 grid_id = slave.get_grid_info(coordinate)
                 if (grid_id != False):
-                    
                     # send the grid id and language code
                     comm.send([grid_id, langauge_code], dest = 0, tag = 2)
 
+            # count how many assignments have been finished
             curr_line += 1
-            # break the loop if the required assignment has been finished
+
+            # break the loop if all the required assignment has been completed
             if (curr_line == assignment_last_line + 1):
                 break
 
@@ -131,19 +147,4 @@ else:
     f.close()
 
     # send finish message to master node
-    comm.send("Finish", dest = 0, tag = 3)
-
-
-# # the master node
-# if rank == 0:
-
-#     n=0
-#     while (n <= 5):
-#         s = comm.recv()
-#         print(s)
-#         n += 1
-
-# # the slave node
-# elif rank: 
-#     for i in range(0, 2):
-#         comm.send(rank, dest=0)
+    comm.send("Finish", dest = 0, tag = 2)
