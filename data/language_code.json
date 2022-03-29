@@ -1,160 +1,209 @@
 {
 	"values": [
-		{
-			"code": "en",
-			"name": "English"
-		},
-		{
-			"code": "ar",
-			"name": "Arabic"
-		},
-		{
-			"code": "bn",
-			"name": "Bengali"
-		},
-		{
-			"code": "cs",
-			"name": "Czech"
-		},
-		{
-			"code": "Danish",
-			"name": "ds"
-		},
-		{
-			"code": "de",
-			"name": "German"
-		},
-		{
-			"code": "el",
-			"name": "Greek"
-		},
-		{
-			"code": "es",
-			"name": "Spanish"
-		},
-		{
-			"code": "fa",
-			"name": "Persian"
-		},
-		{
-			"code": "fi",
-			"name": "Finnish"
-		},
-		{
-			"code": "fil",
-			"name": "Filipino"
-		},
-		{
-			"code": "fr",
-			"name": "French"
-		},
-		{
-			"code": "he",
-			"name": "Hebrew"
-		},
-		{
-			"code": "hi",
-			"name": "Hindi"
-		},
-		{
-			"code": "hu",
-			"name": "Hungarian"
-		},
-		{
-			"code": "id",
-			"name": "Indonesian"
-		},
-		{
-			"code": "it",
-			"name": "Italian"
-		},
-		{
-			"code": "ja",
-			"name": "Japanese"
-		},
-		{
-			"code": "ko",
-			"name": "Korean"
-		},
-		{
-			"code": "msa",
-			"name": "Malay"
-		},
-		{
-			"code": "nl",
-			"name": "Dutch"
-		},
-		{
-			"code": "no",
-			"name": "Norwegian"
-		},
-		{
-			"code": "pl",
-			"name": "Polish"
-		},
-		{
-			"code": "pt",
-			"name": "Portuguese"
-		},
-		{
-			"code": "ro",
-			"name": "Romanian"
-		},
-		{
-			"code": "ru",
-			"name": "Russian"
-		},
-		{
-			"code": "sv",
-			"name": "Swedish"
-		},
-		{
-			"code": "th",
-			"name": "Thai"
-		},
-		{
-			"code": "tr",
-			"name": "Turkish"
-		},
-		{
-			"code": "uk",
-			"name": "Ukrainian"
-		},
-		{
-			"code": "ur",
-			"name": "Urdu"
-		},
-		{
-			"code": "vi",
-			"name": "Vietnamese"
-		},
-		{
-			"code": "zh-cn",
-			"name": "Chinese"
-		},
-		{
-			"code": "zh-tw",
-			"name": "Chinese"
-		},
-		{
-			"code": "tl",
-			"name": "Tagalog"
-		},
-		{
-			"code": "in",
-			"name": "Indonesian"
-		},
-		{
-			"code": "ca",
-			"name": "Catalan"
-		},
-		{
-			"code": "zh",
-			"name": "Chinese"
-		},
-		{
-			"code": "ht",
-			"name": "Haitian"
-		}
+		{"code":"af","name":"Afrikaans"},
+		{"code":"am","name":"Amharic"},
+		{"code":"ar","name":"Arabic"},
+		{"code":"arn","name":"Mapudungun"},
+		{"code":"as","name":"Assamese"},
+		{"code":"az","name":"Azeri"},
+		{"code":"ba","name":"Bashkir"},
+		{"code":"be","name":"Belarusian"},
+		{"code":"bg","name":"Bulgarian"},
+		{"code":"bn","name":"Bengali"},
+		{"code":"bo","name":"Tibetan"},
+		{"code":"br","name":"Breton"},
+		{"code":"bs","name":"Bosnian"},
+		{"code":"ca","name":"Catalan"},
+		{"code":"co","name":"Corsican"},
+		{"code":"cs","name":"Czech"},
+		{"code":"cy","name":"Welsh"},
+		{"code":"da","name":"Danish"},
+		{"code":"de","name":"German"},
+		{"code":"dsb","name":"Lower Sorbian"},
+		{"code":"dv","name":"Divehi"},
+		{"code":"el","name":"Greek"},
+		{"code":"en","name":"English"},
+		{"code":"es","name":"Spanish"},
+		{"code":"et","name":"Estonian"},
+		{"code":"eu","name":"Basque"},
+		{"code":"fa","name":"Persian"},
+		{"code":"fi","name":"Finnish"},
+		{"code":"fil","name":"Filipino"},
+		{"code":"fo","name":"Faroese"},
+		{"code":"fr","name":"French"},
+		{"code":"fy","name":"Frisian"},
+		{"code":"ga","name":"Irish"},
+		{"code":"gd","name":"Scottish Gaelic"},
+		{"code":"gl","name":"Galician"},
+		{"code":"gsw","name":"Alsatian"},
+		{"code":"gu","name":"Gujarati"},
+		{"code":"ha","name":"Hausa"},
+		{"code":"he","name":"Hebrew"},
+		{"code":"hi","name":"Hindi"},
+		{"code":"hr","name":"Croatian"},
+		{"code":"hsb","name":"Upper Sorbian"},
+		{"code":"hu","name":"Hungarian"},
+		{"code":"hy","name":"Armenian"},
+		{"code":"id","name":"Indonesian"},
+		{"code":"in","name":"Indonesian"},
+		{"code":"ig","name":"Igbo"},
+		{"code":"ii","name":"Yi"},
+		{"code":"is","name":"Icelandic"},
+		{"code":"it","name":"Italian"},
+		{"code":"iu","name":"Inuktitut"},
+		{"code":"ja","name":"Japanese"},
+		{"code":"ka","name":"Georgian"},
+		{"code":"kk","name":"Kazakh"},
+		{"code":"kl","name":"Greenlandic"},
+		{"code":"km","name":"Khmer"},
+		{"code":"kn","name":"Kannada"},
+		{"code":"ko","name":"Korean"},
+		{"code":"kok","name":"Konkani"},
+		{"code":"ky","name":"Kyrgyz"},
+		{"code":"lb","name":"Luxembourgish"},
+		{"code":"lo","name":"Lao"},
+		{"code":"lt","name":"Lithuanian"},
+		{"code":"lv","name":"Latvian"},
+		{"code":"mi","name":"Maori"},
+		{"code":"mk","name":"Macedonian"},
+		{"code":"ml","name":"Malayalam"},
+		{"code":"mn","name":"Mongolian"},
+		{"code":"moh","name":"Mohawk"},
+		{"code":"mr","name":"Marathi"},
+		{"code":"ms","name":"Malay"},
+		{"code":"mt","name":"Maltese"},
+		{"code":"my","name":"Burmese"},
+		{"code":"nb","name":"Norwegian (Bokmål)"},
+		{"code":"ne","name":"Nepali"},
+		{"code":"nl","name":"Dutch"},
+		{"code":"nn","name":"Norwegian (Nynorsk)"},
+		{"code":"no","name":"Norwegian"},
+		{"code":"nso","name":"Sesotho"},
+		{"code":"oc","name":"Occitan"},
+		{"code":"or","name":"Oriya"},
+		{"code":"pa","name":"Punjabi"},
+		{"code":"pl","name":"Polish"},
+		{"code":"prs","name":"Dari"},
+		{"code":"ps","name":"Pashto"},
+		{"code":"pt","name":"Portuguese"},
+		{"code":"qut","name":"K'iche"},
+		{"code":"quz","name":"Quechua"},
+		{"code":"rm","name":"Romansh"},
+		{"code":"ro","name":"Romanian"},
+		{"code":"ru","name":"Russian"},
+		{"code":"rw","name":"Kinyarwanda"},
+		{"code":"sa","name":"Sanskrit"},
+		{"code":"sah","name":"Yakut"},
+		{"code":"se","name":"Sami (Northern)"},
+		{"code":"si","name":"Sinhala"},
+		{"code":"sk","name":"Slovak"},
+		{"code":"sl","name":"Slovenian"},
+		{"code":"sma","name":"Sami (Southern)"},
+		{"code":"smj","name":"Sami (Lule)"},
+		{"code":"smn","name":"Sami (Inari)"},
+		{"code":"sms","name":"Sami (Skolt)"},
+		{"code":"sq","name":"Albanian"},
+		{"code":"sr","name":"Serbian"},
+		{"code":"sv","name":"Swedish"},
+		{"code":"sw","name":"Kiswahili"},
+		{"code":"syr","name":"Syriac"},
+		{"code":"ta","name":"Tamil"},
+		{"code":"te","name":"Telugu"},
+		{"code":"tg","name":"Tajik"},
+		{"code":"th","name":"Thai"},
+		{"code":"tk","name":"Turkmen"},
+		{"code":"tl","name":"Turkmen"},
+		{"code":"tn","name":"Setswana"},
+		{"code":"tr","name":"Turkish"},
+		{"code":"tt","name":"Tatar"},
+		{"code":"tzm","name":"Tamazight"},
+		{"code":"ug","name":"Uyghur"},
+		{"code":"uk","name":"Ukrainian"},
+		{"code":"ur","name":"Urdu"},
+		{"code":"uz","name":"Uzbek"},
+		{"code":"vi","name":"Vietnamese"},
+		{"code":"wo","name":"Wolof"},
+		{"code":"xh","name":"isiXhosa"},
+		{"code":"yo","name":"Yoruba"},
+		{"code":"zh","name":"Chinese"},
+		{"code":"zu","name":"isiZulu"},
+		{"code":"zh-tw","name":"Chinese"},
+		{"code":"zh-tw","name":"Chinese"},
+		{"code":"aa","name":"Afar"},
+		{"code":"ab","name":"Abkhazian"},
+		{"code":"ak","name":"Akan"},
+		{"code":"an","name":"Aragonese"},
+		{"code":"av","name":"Avaric"},
+		{"code":"ae","name":"Avestan"},
+		{"code":"ay","name":"Aymara"},
+		{"code":"bm","name":"Bambara"},
+		{"code":"bh","name":"Bihari languages"},
+		{"code":"bi","name":"Bislama"},
+		{"code":"ch","name":"Chamorro"},
+		{"code":"ce","name":"Chechen"},
+		{"code":"cu","name":"Church Slavic; Old Slavonic; Church Slavonic; Old Bulgarian; Old Church Slavonic"},
+		{"code":"cv","name":"Chuvash"},
+		{"code":"kw","name":"Cornish"},
+		{"code":"cr","name":"Cree"},
+		{"code":"dz","name":"Dzongkha"},
+		{"code":"eo","name":"Esperanto"},
+		{"code":"ee","name":"Ewe"},
+		{"code":"fj","name":"Fijian"},
+		{"code":"ff","name":"Fulah"},
+		{"code":"gv","name":"Manx"},
+		{"code":"gn","name":"Guarani"},
+		{"code":"ht","name":"Haitian; Haitian Creole"},
+		{"code":"hz","name":"Herero"},
+		{"code":"ho","name":"Hiri Motu"},
+		{"code":"io","name":"Ido"},
+		{"code":"ie","name":"Interlingue; Occidental"},
+		{"code":"ia","name":"Interlingua (International Auxiliary Language Association)"},
+		{"code":"ik","name":"Inupiaq"},
+		{"code":"jv","name":"Javanese"},
+		{"code":"ks","name":"Kashmiri"},
+		{"code":"kr","name":"Kanuri"},
+		{"code":"ki","name":"Kikuyu; Gikuyu"},
+		{"code":"kv","name":"Komi"},
+		{"code":"kg","name":"Kongo"},
+		{"code":"kj","name":"Kuanyama; Kwanyama"},
+		{"code":"ku","name":"Kurdish"},
+		{"code":"la","name":"Latin"},
+		{"code":"li","name":"Limburgan; Limburger; Limburgish"},
+		{"code":"ln","name":"Lingala"},
+		{"code":"lu","name":"Luba-Katanga"},
+		{"code":"lg","name":"Ganda"},
+		{"code":"mh","name":"Marshallese"},
+		{"code":"mg","name":"Malagasy"},
+		{"code":"na","name":"Nauru"},
+		{"code":"nv","name":"Navajo; Navaho"},
+		{"code":"nr","name":"Ndebele, South; South Ndebele"},
+		{"code":"nd","name":"Ndebele, North; North Ndebele"},
+		{"code":"ng","name":"Ndonga"},
+		{"code":"ny","name":"Chichewa; Chewa; Nyanja"},
+		{"code":"oj","name":"Ojibwa"},
+		{"code":"om","name":"Oromo"},
+		{"code":"os","name":"Ossetian; Ossetic"},
+		{"code":"pi","name":"Pali"},
+		{"code":"qu","name":"Quechua"},
+		{"code":"rn","name":"Rundi"},
+		{"code":"sg","name":"Sango"},
+		{"code":"sm","name":"Samoan"},
+		{"code":"sn","name":"Shona"},
+		{"code":"sd","name":"Sindhi"},
+		{"code":"so","name":"Somali"},
+		{"code":"st","name":"Sotho, Southern"},
+		{"code":"sc","name":"Sardinian"},
+		{"code":"ss","name":"Swati"},
+		{"code":"su","name":"Sundanese"},
+		{"code":"ty","name":"Tahitian"},
+		{"code":"ti","name":"Tigrinya"},
+		{"code":"to","name":"Tonga (Tonga Islands)"},
+		{"code":"ts","name":"Tsonga"},
+		{"code":"tw","name":"Twi"},
+		{"code":"ve","name":"Venda"},
+		{"code":"vo","name":"Volapük"},
+		{"code":"wa","name":"Walloon"},
+		{"code":"yi","name":"Yiddish"},
+		{"code":"za","name":"Zhuang; Chuang"}
 	]
 }
