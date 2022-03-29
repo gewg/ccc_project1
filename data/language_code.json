@@ -29,12 +29,12 @@
 			"name": "Greek"
 		},
 		{
-			"code": "Spanish",
-			"name": "es"
+			"code": "es",
+			"name": "Spanish"
 		},
 		{
-			"code": "Persian",
-			"name": "fa"
+			"code": "fa",
+			"name": "Persian"
 		},
 		{
 			"code": "fi",
@@ -135,6 +135,14 @@
 		{
 			"code": "zh-tw",
 			"name": "Chinese"
+		},
+		{
+			"code": "tl",
+			"name": "Tagalog"
+		},
+		{
+			"code": "in",
+			"name": "Indonesian"
 		}
 	]
 }

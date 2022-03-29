@@ -69,7 +69,7 @@ if rank == 0:
     while (num_finish_slave < num_slaves):
         
         # receive the message from slaves
-        recv_message = comm.recv(tag=2)
+        recv_message = comm.recv(tag = 2)
 
         if (recv_message == 'Finish'):
             # get the 'finish job' signal from slave
@@ -119,22 +119,11 @@ else:
         # filter the twitter data to match grid
         for line in iter(mm.readline, b""):
             
-            # convert the current line from byte string to json string
-            line = slave.convert_byte_to_json(line)
+            # get the information from the current line
+            line_info = slave.get_grid_language_info(line)
 
-            # get the coordinate and language code from the current line
-            coordinates_info = line["doc"]["coordinates"]
-            langauge_code = line["doc"]["lang"]
-
-            # check the coordinate's belonging
-            if (coordinates_info != None):
-                coordinate = coordinates_info["coordinates"]
-                
-                # get the corresponding grid information of the coordinate
-                grid_id = slave.get_grid_info(coordinate)
-                if (grid_id != False):
-                    # send the grid id and language code
-                    comm.send([grid_id, langauge_code], dest = 0, tag = 2)
+            if (line_info != False):
+                comm.send(line_info, dest = 0, tag = 2)
 
             # count how many assignments have been finished
             curr_line += 1

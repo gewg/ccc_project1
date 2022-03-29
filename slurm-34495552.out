@@ -1,0 +1,44 @@
+The following modules were not unloaded:
+  (Use "module --force purge" to unload all):
+
+  1) showq/0.15   2) slurm/latest
+Cell   #Total Tweets   #Number of Languages Used         #Top 10 Languages & #Tweets
+1      8165              33                                  (en-7596, ja-80, und-64, es-60, in-54, ca-32, pt-28, it-26, zh-24, tl-23, ro-22)
+Job ID           : 34495552
+Cluster          : spartan
+User/Project     : gewg/comp90024
+Nodes            : 5
+Wall-clock time  : 00:01:31 / 00:10:00
+
+Displaying overall resources usage from 2022-03-29 20:49:21 to 2022-03-29 20:50:52:
+
+NODE            CPU#        TOT%   ( USR   / SYS   / WIO   / IDLE  ) 
+
+spartan-bm019 : 
+                CPU# 1    : 80.4   (  37.8 /  42.6 /   0.0 /  19.6 ) 
+                CPU# 2    : 94.8   (  88.9 /   5.8 /   0.0 /   5.2 ) 
+
+spartan-bm020 : 
+                CPU# 3    : 89.1   (  83.9 /   5.1 /   0.0 /  10.9 ) 
+
+spartan-bm095 : 
+                CPU# 4    : 78.4   (  74.7 /   3.7 /   0.0 /  21.6 ) 
+                CPU# 5    : 76.5   (  72.9 /   3.7 /   0.0 /  23.5 ) 
+
+spartan-bm107 : 
+                CPU# 6    : 78.6   (  77.0 /   1.6 /   0.0 /  21.4 ) 
+
+spartan-bm110 : 
+                CPU# 7    : 82.9   (  77.6 /   5.3 /   0.0 /  17.1 ) 
+                CPU# 8    : 83.8   (  78.4 /   5.4 /   0.0 /  16.2 ) 
+
+
+Allocated CPUs            : 8    
+  CPUs with usage <25%    : 0    
+  CPUs with usage <50%    : 0    
+  CPUs with usage >50%    : 8    
+
+Memory used (RAM)         : 0.0%  [5MB of 32000MB]
+
+--------------------------------------------
+

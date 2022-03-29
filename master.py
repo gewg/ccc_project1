@@ -114,7 +114,7 @@ class Master:
             total_language_be_used = len(curr_grid_dict.keys()) - 1 # minus 1 means minus the 'total_tweets' attribute
 
             # sort dictionary to get the top 10 language
-            curr_grid_dict = {k: v for k, v in sorted(curr_grid_dict.items(), key=lambda item: item[1])}
+            curr_grid_dict = {k: v for k, v in sorted(curr_grid_dict.items(), key=lambda item: item[1], reverse=True)}
             
             # search the top 10 language
             top_10_string = ""
