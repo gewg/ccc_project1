@@ -70,7 +70,7 @@ class Slave:
             
             # check the gird's belonging
             grid_id = self.get_grid_info(coordinate)
-            if (grid_id != False):
+            if (grid_id != False and language_code != 'und'):
                 return [grid_id, language_code]
         
         return False

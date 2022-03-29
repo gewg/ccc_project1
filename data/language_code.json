@@ -143,6 +143,18 @@
 		{
 			"code": "in",
 			"name": "Indonesian"
+		},
+		{
+			"code": "ca",
+			"name": "Catalan"
+		},
+		{
+			"code": "zh",
+			"name": "Chinese"
+		},
+		{
+			"code": "ht",
+			"name": "Haitian"
 		}
 	]
 }
