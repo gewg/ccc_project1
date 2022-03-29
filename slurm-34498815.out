@@ -1,0 +1,48 @@
+The following modules were not unloaded:
+  (Use "module --force purge" to unload all):
+
+  1) showq/0.15   2) slurm/latest
+Cell   #Total Tweets   #Number of Languages Used         #Top 10 Languages & #Tweets
+Traceback (most recent call last):
+  File "main.py", line 87, in <module>
+    master.show_result(dict_result, language_map)
+  File "/home/yiwzhang1/ccc_project1/master.py", line 129, in show_result
+    top_10_string += f"{language_map[curr_language_code]}-{curr_grid_dict[curr_language_code]}, "
+KeyError: 'und'
+srun: error: spartan-bm090: task 0: Exited with exit code 1
+Job ID           : 34498815
+Cluster          : spartan
+User/Project     : yiwzhang1/comp90024
+Nodes            : 4
+Wall-clock time  : 00:01:31 / 00:10:00
+
+Displaying overall resources usage from 2022-03-29 23:55:15 to 2022-03-29 23:56:46:
+
+NODE            CPU#        TOT%   ( USR   / SYS   / WIO   / IDLE  ) 
+
+spartan-bm090 : 
+                CPU# 1    : 93.2   (  53.5 /  39.7 /   0.0 /   6.8 ) 
+                CPU# 2    : 92.4   (  84.2 /   8.2 /   0.0 /   7.6 ) 
+                CPU# 3    : 92.5   (  84.9 /   7.5 /   0.0 /   7.5 ) 
+
+spartan-bm094 : 
+                CPU# 4    : 93.3   (  89.8 /   3.5 /   0.0 /   6.7 ) 
+
+spartan-bm095 : 
+                CPU# 5    : 81.4   (  76.5 /   4.9 /   0.0 /  18.6 ) 
+                CPU# 6    : 79.8   (  75.4 /   4.3 /   0.0 /  20.2 ) 
+
+spartan-bm098 : 
+                CPU# 7    : 92.7   (  87.6 /   5.0 /   0.0 /   7.3 ) 
+                CPU# 8    : 93.0   (  88.0 /   5.0 /   0.0 /   7.0 ) 
+
+
+Allocated CPUs            : 8    
+  CPUs with usage <25%    : 0    
+  CPUs with usage <50%    : 0    
+  CPUs with usage >50%    : 8    
+
+Memory used (RAM)         : 0.0%  [5MB of 32000MB]
+
+--------------------------------------------
+

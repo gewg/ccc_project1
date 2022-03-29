@@ -16,10 +16,25 @@ class Slave:
         :return boolean or int: 'false if coordinate does not match the city grid' or 'grid id if matches'
         '''
         # check whether current line's coordinate exists
+        potential_grid = []
 
-
-
-        return 1
+        for key, value in self.grid_map.items():
+            lat1 = value[0][0]
+            lat2 = value[2][0]
+            lon1 = value[2][-1]
+            lon2 = value[0][-1]
+            if (lat1 <= coordinate[0] and coordinate[0] <= lat2):
+                if (lon1 <= coordinate[1] and coordinate[1] <= lon2):
+                    potential_grid.append(key)
+        
+        if len(potential_grid)==0:
+            return False
+        if len(potential_grid)==2:
+            if potential_grid[-1] - potential_grid[0] == 4:
+                return potential_grid[-1]
+            else:
+                return potential_grid[0]
+        
 
     
     def get_grid_language_info(self, line):
