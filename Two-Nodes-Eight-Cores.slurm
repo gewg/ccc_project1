@@ -1,6 +1,8 @@
 #!/bin/bash
 #SBATCH -p physical
+#SBATCH --nodes=2
 #SBATCH --ntasks=8
+#SBATCH --cpus-per-task=4
 module purge
 module load foss/2019b
 module load mpi4py/3.0.2-timed-pingpong

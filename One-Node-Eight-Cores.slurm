@@ -1,5 +1,6 @@
 #!/bin/bash
 #SBATCH -p physical
+#SBATCH --nodes=1
 #SBATCH --ntasks=8
 module purge
 module load foss/2019b
