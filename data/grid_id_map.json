@@ -1,0 +1,20 @@
+{
+    "values": [
+		    {"grid_id":9,"serial_number":"A1"},
+        {"grid_id":10,"serial_number":"B1"},
+        {"grid_id":11,"serial_number":"C1"},
+        {"grid_id":12,"serial_number":"D1"},
+        {"grid_id":13,"serial_number":"A2"},
+        {"grid_id":14,"serial_number":"B2"},
+        {"grid_id":15,"serial_number":"C2"},
+        {"grid_id":16,"serial_number":"D2"},
+        {"grid_id":17,"serial_number":"A3"},
+        {"grid_id":18,"serial_number":"B3"},
+        {"grid_id":19,"serial_number":"C3"},
+        {"grid_id":20,"serial_number":"D3"},
+        {"grid_id":21,"serial_number":"A4"},
+        {"grid_id":22,"serial_number":"B4"},
+        {"grid_id":23,"serial_number":"C4"},
+        {"grid_id":24,"serial_number":"D4"}
+	]
+}

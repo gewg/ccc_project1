@@ -26,7 +26,6 @@ class Master:
         return grid_dict
 
 
-
     def get_twitter_file_info(self, json_file):
         '''
         Get the number of json file's rows and each line's beginning subscript
@@ -69,6 +68,7 @@ class Master:
         
         return [rows_num, offsets]
 
+
     def get_language_code_map(self, json_file):
         '''
         Get the map to connect language with language code
@@ -92,7 +92,30 @@ class Master:
         return language_map
 
 
-    def show_result(self, dict_result, language_map):
+    def get_grid_match_map(self, json_file):
+        '''
+        Get the map to connect two formats of grid id
+
+        :param json_file: contains the relation between the two formats
+        :return: dictionary, 'key as grid id' and 'value as serial number' eg. {'9':'A1'}
+        '''
+
+        # read the json file
+        f = open(json_file,"r")
+        grids  = json.load(f)
+
+        # stores the grid dictionary
+        grid_id_match_map = {}
+        
+        # search the grid id and grid coordinates
+        for curr_grid in grids["values"]:
+            grid_id_match_map[curr_grid["grid_id"]] = curr_grid["serial_number"]
+
+
+        return grid_id_match_map
+
+
+    def show_result(self, dict_result, language_map, grid_id_match_map):
         '''
         Print the result in terminal
 
@@ -124,7 +147,7 @@ class Master:
                 # skip the largest element which is the total tweets
                 if (curr_language_code == 'total_tweets'):
                     continue
-                
+
                 # combine the string
                 top_10_string += f"{language_map[curr_language_code]}-{curr_grid_dict[curr_language_code]}, "
                 top_10_count +=1
@@ -135,9 +158,10 @@ class Master:
             
             # delete the lastest comma and blank
             top_10_string = top_10_string[:-2]
+            # get the grid id's another format
+            curr_grid_id = grid_id_match_map[curr_grid_id]
             # show the current cell's info
-            print(f"{curr_grid_id}      {total_tweets}              {total_language_be_used}                                  ({top_10_string})")
-
+            print('{0:<8} {1:<21} {2:<25} {3:}'.format(curr_grid_id, total_tweets, total_language_be_used, "("+top_10_string+")"))
 
 
 

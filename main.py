@@ -1,19 +1,22 @@
 from collections import defaultdict
 import mmap
+import sys
 from mpi4py import MPI
 from master import Master
-from slave import Slave
+from info_capturer import InfoCapturer
 
 comm = MPI.COMM_WORLD
 size = comm.Get_size()
 rank = comm.Get_rank()
 
 # the twitter data
-TWITTER_DATA = "data/bigTwitter.json"
+arg_twitter_file = sys.argv[1]
 # the city grid data
-CITY_GRID_DATA = "data/sydGrid.json"
+arg_city_grid_file = sys.argv[2]
+# the two format of grid id
+arg_grid_id_map_file = sys.argv[3]
 # the language code data
-LANGUAGE_CODE_DATA = "data/language_code.json"
+arg_language_code_data_file = sys.argv[4]
 
 # the master node
 if rank == 0:
@@ -21,70 +24,107 @@ if rank == 0:
     master = Master()
 
     '''Get the city grid map'''
-    grid_map = master.get_grid_file(CITY_GRID_DATA)
+    grid_map = master.get_grid_file(arg_city_grid_file)
 
     '''Get the language map'''
-    language_map = master.get_language_code_map(LANGUAGE_CODE_DATA)
+    language_map = master.get_language_code_map(arg_language_code_data_file)
 
-    '''Assign reading's task to slaves'''
-    # get the number of twitter data's rows and offset for each line in twitter data
-    twitter_info = master.get_twitter_file_info(TWITTER_DATA)
-    num_twitter_row = twitter_info[0]
-    twitter_file_offset = twitter_info[1]
-
-    # get the number of slaves, 'minus one' means 'minus the master node'
-    num_slaves = size - 1
-    # count how many rows need to be count for each slave, "minus one" means "minus the first line which contains total rows' number"
-    num_each_slave = (num_twitter_row - 1) // num_slaves
-    # if there is reminder, assign these tasks to the last slave
-    num_tasks_reminder = (num_twitter_row - 1) % num_slaves
-
-    # each task's beginning and ending line for each slave
-    head_curr_slave = 1
-    end_curr_slave = 1
-    # send assignment to each slave
-    for i in range(1, num_slaves + 1):
-        # count the beginning and ending line for each slave
-        head_curr_slave = end_curr_slave + 1 # 'plus 1' means 'move the head to the first line for current slave'
-        end_curr_slave = head_curr_slave + (num_each_slave - 1) # 'minus 1' because 'the head has been moved to the first line for current slave'
-
-        # plus the reminder if reach the lastest slave
-        if (i == num_slaves):
-            end_curr_slave += num_tasks_reminder
-        
-        # send the city grid and offset
-        comm.send([grid_map, twitter_file_offset], dest = i, tag = 0)
-        # send the assignment
-        comm.send([head_curr_slave, end_curr_slave], dest = i, tag = 1)
-    
-
-    '''Receive data from slaves and Count the language'''
-    # count the number of slaves which complete the task
-    num_finish_slave = 0
+    '''Get the grid matching map'''
+    grid_id_match_map = master.get_grid_match_map(arg_grid_id_map_file)
 
     # the dictinay to store the result
     dict_result = defaultdict(lambda: defaultdict(int))
 
-    # continue receiving until all slaves finish their jobs
-    while (num_finish_slave < num_slaves):
+    # single process if there is only one core
+    if (size == 1):
+        # create a capturer of information object for current slave process
+        info_capturer = InfoCapturer(grid_map)
+
+        '''Get the required information and send to master one by one'''
+        # read the file
+        with open(arg_twitter_file, "r") as f:
+            mm = mmap.mmap(f.fileno(), 0, access=mmap.ACCESS_READ)
+
+            # skip the first line
+            mm.readline()
+
+            # filter the twitter data to match grid
+            for line in iter(mm.readline, b""):
+                
+                # get the information from the current line
+                line_info = info_capturer.get_grid_language_info(line)
+
+                # get the grid id and language code from slave
+                if (line_info != False):
+                    grid_id = line_info[0]
+                    language_code = line_info[1]
+                    dict_result[grid_id][language_code] += 1
+
+                    # count the total tweets
+                    dict_result[grid_id]['total_tweets'] += 1
+
+            mm.close()
+        f.close()
+
+
+    # multiple processes if there are more than one core
+    else:
+        '''Assign reading's task to slaves'''
+        # get the number of twitter data's rows and offset for each line in twitter data
+        twitter_info = master.get_twitter_file_info(arg_twitter_file)
+        num_twitter_row = twitter_info[0]
+        twitter_file_offset = twitter_info[1]
+
+        # get the number of slaves, 'minus one' means 'minus the master node'
+        num_slaves = size - 1
+        # count how many rows need to be count for each slave, "minus one" means "minus the first line which contains total rows' number"
+        num_each_slave = (num_twitter_row - 1) // num_slaves
+        # if there is reminder, assign these tasks to the last slave
+        num_tasks_reminder = (num_twitter_row - 1) % num_slaves
+
+        # each task's beginning and ending line for each slave
+        head_curr_slave = 1
+        end_curr_slave = 1
+        # send assignment to each slave
+        for i in range(1, num_slaves + 1):
+            # count the beginning and ending line for each slave
+            head_curr_slave = end_curr_slave + 1 # 'plus 1' means 'move the head to the first line for current slave'
+            end_curr_slave = head_curr_slave + (num_each_slave - 1) # 'minus 1' because 'the head has been moved to the first line for current slave'
+
+            # plus the reminder if reach the lastest slave
+            if (i == num_slaves):
+                end_curr_slave += num_tasks_reminder
+            
+            # send the city grid and offset
+            comm.send([grid_map, twitter_file_offset], dest = i, tag = 0)
+            # send the assignment
+            comm.send([head_curr_slave, end_curr_slave], dest = i, tag = 1)
         
-        # receive the message from slaves
-        recv_message = comm.recv(tag = 2)
 
-        if (recv_message == 'Finish'):
-            # get the 'finish job' signal from slave
-            num_finish_slave += 1
-        else:
-            # otherwise, get the grid id and language code from slave
-            grid_id = recv_message[0]
-            language_code = recv_message[1]
-            dict_result[grid_id][language_code] += 1
+        '''Receive data from slaves and Count the language'''
+        # count the number of slaves which complete the task
+        num_finish_slave = 0
 
-            # count the total tweets
-            dict_result[grid_id]['total_tweets'] += 1
-    
-    # print the result in terminal
-    master.show_result(dict_result, language_map)
+        # continue receiving until all slaves finish their jobs
+        while (num_finish_slave < num_slaves):
+            
+            # receive the message from slaves
+            recv_message = comm.recv(tag = 2)
+
+            if (recv_message == 'Finish'):
+                # get the 'finish job' signal from slave
+                num_finish_slave += 1
+            else:
+                # otherwise, get the grid id and language code from slave
+                grid_id = recv_message[0]
+                language_code = recv_message[1]
+                dict_result[grid_id][language_code] += 1
+
+                # count the total tweets
+                dict_result[grid_id]['total_tweets'] += 1
+        
+    '''Print the result in terminal'''
+    master.show_result(dict_result, language_map, grid_id_match_map)
     
 
 
@@ -102,13 +142,12 @@ else:
     assignment_first_line = assignment[0]
     assignment_last_line = assignment[1]
     
-    # create a slave object for current slave process
-    slave = Slave(grid_map)
+    # create a capturer of information object for current slave process
+    info_capturer = InfoCapturer(grid_map)
 
     '''Get the required information and send to master one by one'''
     # read the file
-    json_file = TWITTER_DATA
-    with open(json_file, "r") as f:
+    with open(arg_twitter_file, "r") as f:
         mm = mmap.mmap(f.fileno(), 0, access=mmap.ACCESS_READ)
         
         # position head to the assigned task's first line
@@ -120,7 +159,7 @@ else:
         for line in iter(mm.readline, b""):
             
             # get the information from the current line
-            line_info = slave.get_grid_language_info(line)
+            line_info = info_capturer.get_grid_language_info(line)
 
             if (line_info != False):
                 comm.send(line_info, dest = 0, tag = 2)
