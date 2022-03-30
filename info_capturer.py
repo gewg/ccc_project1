@@ -15,10 +15,11 @@ class InfoCapturer:
         :param coordinate: a tuple with coordinate
         :return boolean or int: 'false if coordinate does not match the city grid' or 'grid id if matches'
         '''
-        # check whether current line's coordinate exists
+        # store the potential grid that the coordinate may belong to
         potential_grid = []
-        for key, value in self.grid_map.items():
 
+        # loop through every grid to check if coordinate are in the grid or not
+        for key, value in self.grid_map.items():
             lat1 = value[0][0]
             lat2 = value[2][0]
             lon1 = value[2][-1]
@@ -26,15 +27,18 @@ class InfoCapturer:
             if (lat1 <= coordinate[0] and coordinate[0] <= lat2):
                 if (lon1 <= coordinate[1] and coordinate[1] <= lon2):
                     potential_grid.append(key)
-
+        
+        # return fales if there is no matching grid
         if len(potential_grid)==0:
             return False
         
+        # if there are two grids that the coordinate belong to
+        # choose the grid based on left right choose left, up down choose up. otherwise return the only grid
         if len(potential_grid)==2:
             if potential_grid[-1] - potential_grid[0] == 4:
-                return potential_grid[-1]
-            else:
                 return potential_grid[0]
+            else:
+                return potential_grid[-1]
         else:
             return potential_grid[0]
         

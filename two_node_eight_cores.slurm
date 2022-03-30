@@ -3,7 +3,6 @@
 #SBATCH --time=00:05:00
 #SBATCH --nodes=2
 #SBATCH --ntasks=8
-#SBATCH --cpus-per-task=4
 
 module purge
 module load foss/2019b
