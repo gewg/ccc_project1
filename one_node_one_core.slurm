@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH -p physical
-#SBATCH --time=00:05:00
+#SBATCH --time=00:10:00
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 

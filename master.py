@@ -126,6 +126,9 @@ class Master:
         # show the title
         print(f"Cell   #Total Tweets   #Number of Languages Used         #Top 10 Languages & #Tweets")
 
+        # sort the dictionary by id
+        dict_result = {k: v for k, v in sorted(dict_result.items(), key=lambda item: grid_id_match_map[item[0]])}
+
         # show the grid's one by one
         for curr_grid_id in dict_result.keys():
             
