@@ -4,7 +4,9 @@ import sys
 from mpi4py import MPI
 from master import Master
 from info_capturer import InfoCapturer
+import time
 
+start = time.time()
 comm = MPI.COMM_WORLD
 size = comm.Get_size()
 rank = comm.Get_rank()
@@ -125,6 +127,8 @@ if rank == 0:
         
     '''Print the result in terminal'''
     master.show_result(dict_result, language_map, grid_id_match_map)
+    end = time.time()
+    print("The execution time is ", time.strftime("%H:%M:%S",time.gmtime(end-start)))
     
 
 
