@@ -126,9 +126,14 @@ if rank == 0:
                 dict_result[grid_id]['total_tweets'] += 1
         
     '''Print the result in terminal'''
+    # show result
     master.show_result(dict_result, language_map, grid_id_match_map)
+    print()
+
+    #show time
     end = time.time()
     print("The execution time is ", time.strftime("%H:%M:%S",time.gmtime(end-start)))
+    print()
     
 
 
